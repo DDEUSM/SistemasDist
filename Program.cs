@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Exercicio.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ExercicioContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("ExercicioContext") ?? throw new InvalidOperationException("Connection string 'ExercicioContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
